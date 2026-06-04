@@ -1,0 +1,27 @@
+---
+interface Props { sectionHeading: string; body: string; portraitImage: string; }
+const { sectionHeading, body, portraitImage } = Astro.props;
+---
+<!-- No outer wrapper — this is placed inside a section in index.astro -->
+<div class="flex flex-col lg:flex-row gap-10 items-start w-full">
+
+  <!-- Text column — max 548px per spec -->
+  <div class="flex flex-col gap-8 flex-1 min-w-0 max-w-[548px]">
+    <div class="bg-brand-yellow h-1 w-12 rounded-full" aria-hidden="true"></div>
+    <div class="flex flex-col gap-2.5">
+      <h2 id="about-heading" class="font-merriweather font-bold text-brand-white text-h2 leading-[1.11]">
+        {sectionHeading}
+      </h2>
+      <p class="font-merriweather-sans font-normal text-brand-gray-1 text-body leading-[1.625]">
+        {body}
+      </p>
+    </div>
+  </div>
+
+  <!-- Portrait — fixed 375×439px matching Figma -->
+  <div class="shrink-0 rounded-[24px] overflow-hidden shadow-[0_16px_24px_-12px_rgba(0,0,0,0.25)] w-[375px] h-[439px]">
+    <img src={portraitImage} alt="Michal Brandel, Regulatory Legal Counsel"
+      class="w-full h-full object-cover object-top" width="375" height="439" loading="lazy" />
+  </div>
+
+</div>

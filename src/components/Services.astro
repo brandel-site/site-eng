@@ -1,0 +1,73 @@
+---
+interface Service { title: string; description?: string; bullets?: string[]; }
+interface Props { sectionHeading: string; sectionSubtext: string; services: Service[]; }
+const { sectionHeading, sectionSubtext, services } = Astro.props;
+---
+<section id="services" class="py-32 w-full" aria-labelledby="services-heading">
+  <div class="max-w-site mx-auto px-16 flex flex-col gap-16">
+
+    <!-- Section intro — capped at 548px -->
+    <div class="flex flex-col gap-8">
+      <div class="bg-brand-yellow h-1 w-12 rounded-full" aria-hidden="true"></div>
+      <div class="flex flex-col gap-4 max-w-[548px]">
+        <h2 id="services-heading" class="font-merriweather font-bold text-brand-white text-h2 leading-[1.11]">
+          {sectionHeading}
+        </h2>
+        <p class="font-merriweather-sans font-normal text-brand-gray-1 text-body leading-6">
+          {sectionSubtext}
+        </p>
+      </div>
+    </div>
+
+    <!-- 2-column service grid — gap-16 (64px) between columns, gap-16 between rows -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+      {services.map(({ title, description, bullets }, i) => (
+        <article class="flex items-start gap-4 service-card" data-index={i}>
+          <div class="accent-line-v" aria-hidden="true"></div>
+          <div class="flex flex-col gap-3.5 flex-1 min-w-0">
+            <h3 class="font-merriweather font-bold text-brand-white text-h3 leading-[1.35]">{title}</h3>
+            <button
+              class="read-more-btn font-merriweather-sans font-normal text-brand-gray-1 text-body leading-6 text-left hover:text-brand-yellow transition-colors"
+              aria-expanded="false" aria-controls={`service-detail-${i}`}>
+              Read More
+            </button>
+            <div id={`service-detail-${i}`} class="service-detail hidden flex-col gap-3.5" aria-hidden="true">
+              {description && (
+                <p class="font-merriweather-sans font-bold text-brand-white text-body leading-relaxed">{description}</p>
+              )}
+              {bullets && bullets.length > 0 && (
+                <ul class="list-disc pl-6 flex flex-col gap-1">
+                  {bullets.map(b => (
+                    <li class="font-merriweather-sans font-normal text-brand-gray-1 text-body leading-[1.9]">{b}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.service-card').forEach(card => {
+    const btn    = card.querySelector<HTMLButtonElement>('.read-more-btn')!;
+    const detail = card.querySelector<HTMLElement>('.service-detail')!;
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        detail.classList.add('hidden'); detail.classList.remove('flex');
+        detail.setAttribute('aria-hidden', 'true');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = 'Read More';
+      } else {
+        detail.classList.remove('hidden'); detail.classList.add('flex');
+        detail.setAttribute('aria-hidden', 'false');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.textContent = 'Read Less';
+      }
+    });
+  });
+</script>

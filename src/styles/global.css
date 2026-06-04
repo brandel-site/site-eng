@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Smooth scroll ──────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Focus ring ─────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #FFDF52;
+  outline-offset: 3px;
+}
+
+/* ── Testimonial carousel (CSS-grid crossfade) ──────── */
+.testimonial-track {
+  display: grid;
+}
+.testimonial-slide {
+  grid-column: 1;
+  grid-row: 1;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+.testimonial-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Vertical accent line (rotated) ─────────────────── */
+.accent-line-v {
+  flex-shrink: 0;
+  width: 4px;
+  align-self: stretch;
+  background-color: #ffdf52;
+  border-radius: 999px;
+}
+
+/* ── Mobile nav drawer ──────────────────────────────── */
+#mobile-nav {
+  display: none;
+}
+#mobile-nav.open {
+  display: flex;
+}

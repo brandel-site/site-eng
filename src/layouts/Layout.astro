@@ -1,0 +1,116 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Michal Brandel | Israeli Food Law & Regulatory Legal Counsel',
+  description = 'Expert Israeli food regulation lawyer helping foreign and domestic companies navigate Israeli food and drink law. Strategic regulatory clarity and legal advisory for market entry, labeling, and compliance.',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://www.brandel.co.il');
+
+// TODO: Replace with your actual Google Analytics Measurement ID (format: G-XXXXXXXXXX)
+const GA_ID = 'G-XXXXXXXXXX';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph & Twitter Card -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content={canonicalURL} />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content="/images/og-image.jpg" />
+  <meta property="og:locale"      content="en_IL" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:title"      content={title} />
+  <meta name="twitter:description" content={description} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Fonts (Google Fonts – self-host later via fontsource if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&family=Merriweather:ital,wght@0,400;0,700&family=Merriweather+Sans:wght@300;400&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Structured Data — helps Google, ChatGPT, Perplexity, etc. understand the site -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Michal Brandel – Regulatory Legal Counsel",
+    "alternateName": "Brandel",
+    "description": "Expert Israeli food and drink regulation lawyer specialising in market entry, EU–Israel comparative regulation, product compliance, labeling, and risk advisory for foreign and domestic companies.",
+    "url": "https://www.brandel.co.il",
+    "email": "contact@brandel.co.il",
+    "areaServed": ["Israel", "European Union"],
+    "knowsAbout": [
+      "Israeli food law",
+      "Food regulation",
+      "EU–Israel regulatory alignment",
+      "Product compliance",
+      "Hebrew labeling requirements",
+      "Food import regulations",
+      "Regulatory market entry",
+      "Competition law"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tel Aviv",
+      "addressCountry": "IL"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Regulatory Legal Services",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Regulatory Market Entry to Israel"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Comparative Regulation: EU / Israel"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Product Compliance & Regulatory Assessment"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Packaging, Labeling & Product Requirements"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Risk Assessment & Regulatory Strategy"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ongoing Regulatory Advisory"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Representation in Regulatory Proceedings & Class Actions"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Additional Regulatory & Competition Law Services"}}
+      ]
+    }
+  }
+  </script>
+
+  <!-- Google Analytics 4 -->
+  <!-- Replace G-XXXXXXXXXX with your actual Measurement ID from analytics.google.com -->
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+  <script define:vars={{ GA_ID }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  </script>
+</head>
+
+<body class="bg-brand-darker text-brand-white font-merriweather-sans antialiased">
+  <!-- Accessibility: skip nav link -->
+  <a
+    href="#main-content"
+    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-brand-yellow focus:text-brand-darker focus:px-4 focus:py-2 focus:rounded focus:font-dm-sans"
+  >
+    Skip to main content
+  </a>
+
+  <slot />
+</body>
+</html>

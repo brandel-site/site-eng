@@ -1,0 +1,58 @@
+{
+  "hero": {
+    "heading": "Navigate Israeli Food Law with Confidence",
+    "subtext": "Foreign and domestic companies wishing to be aligned with Israeli food and drinks regulation and need more than translation – need expertise. Brandel delivers strategic regulatory clarity and legal advisory.",
+    "ctaText": "Start Your Market Entry",
+    "backgroundImage": "/images/hero-bg.jpg"
+  },
+  "services": {
+    "sectionHeading": "Services",
+    "sectionSubtext": "Advising food and beverages manufacturers, importers, distributors, and international brands on Israeli food regulation, European regulatory alignment, and the legal and commercial implications of the \"What Is Good for Europe Is Good for Israel\" reform."
+  },
+  "whyIsrael": {
+    "sectionHeading": "Why Israel Is Different",
+    "sectionSubtext": "The Israeli regulatory landscape has distinct requirements that differ from both European and American standards. Understanding these differences is critical for successful market entry.",
+    "cards": [
+      {
+        "title": "Different Legal Framework",
+        "body": "Israeli food law operates independently from EU and FDA systems, with unique approval requirements."
+      },
+      {
+        "title": "Mandatory Labeling in Hebrew",
+        "body": "All product labels must comply with strict Hebrew labeling standards and Israeli consumer protection laws."
+      },
+      {
+        "title": "Local Representation Required",
+        "body": "Foreign companies need authorized local representation for regulatory matters and official correspondence."
+      }
+    ],
+    "furtherReading": [
+      {
+        "label": "Government adopts European food standards in bid to tackle cost of living",
+        "url": "https://www.timesofisrael.com/government-adopts-european-food-standards-in-bid-to-tackle-cost-of-living/"
+      },
+      {
+        "label": "Israel's food labeling reform: What do consumers say?",
+        "url": "https://www.jpost.com/israel-news/israels-food-labeling-reform-what-do-consumers-say-613455"
+      },
+      {
+        "label": "Agriculture Ministry launches system to assess food import risks amid boycotts, climate change",
+        "url": "https://www.jpost.com/israel-news/article-868881"
+      }
+    ]
+  },
+  "about": {
+    "sectionHeading": "Years of Navigating the Israeli Food Sector",
+    "body": "With over a decade of specialized experience in Israeli food law, I've helped dozens of international companies successfully navigate the regulatory landscape. My focus is on building long-term partnerships, acting as your dedicated regulatory office in the region.",
+    "portraitImage": "/images/michal-portrait.png"
+  },
+  "contact": {
+    "sectionHeading": "Get In Touch",
+    "subtext": "Contact us to request regulatory advisory regarding the Israeli market requirements.",
+    "email": "contact@brandel.co.il",
+    "location": "Tel Aviv, Israel"
+  },
+  "footer": {
+    "copyright": "© 2026 Brandel. Expert food regulation counsel for Israeli market entry."
+  }
+}

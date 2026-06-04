@@ -1,0 +1,54 @@
+---
+interface Card { title: string; body: string; }
+interface Link { label: string; url: string; }
+interface Props { sectionHeading: string; sectionSubtext: string; cards: Card[]; furtherReading: Link[]; }
+const { sectionHeading, sectionSubtext, cards, furtherReading } = Astro.props;
+---
+<section id="expertise" class="bg-[rgba(255,255,255,0.02)] py-32 w-full" aria-labelledby="why-heading">
+  <div class="max-w-site mx-auto px-16 flex flex-col gap-16">
+
+    <!-- Section intro — capped at 548px -->
+    <div class="flex flex-col gap-8">
+      <div class="bg-brand-yellow h-1 w-12 rounded-full" aria-hidden="true"></div>
+      <div class="flex flex-col gap-4 max-w-[548px]">
+        <h2 id="why-heading" class="font-merriweather font-bold text-brand-white text-h2 leading-[1.11]">
+          {sectionHeading}
+        </h2>
+        <p class="font-merriweather-sans font-normal text-brand-gray-1 text-body leading-6">
+          {sectionSubtext}
+        </p>
+      </div>
+    </div>
+
+    <!-- 3 feature cards — gap-8 (32px) matching Figma -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {cards.map(({ title, body }) => (
+        <div class="border border-brand-border rounded-card p-8 flex flex-col gap-3.5"
+          style="background:linear-gradient(130deg,rgba(255,255,255,0) 2%,rgba(255,255,255,0.08) 99%)">
+          <h3 class="font-merriweather font-bold text-brand-white text-h3 leading-[1.35]">{title}</h3>
+          <div class="bg-brand-yellow-light h-1 w-16 rounded-full" aria-hidden="true"></div>
+          <p class="font-merriweather-sans font-normal text-brand-gray-1 text-body leading-6">{body}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Further Reading -->
+    <div class="flex flex-col gap-8">
+      <h3 class="font-merriweather font-bold text-brand-white text-h3 leading-[1.25]">Further Reading</h3>
+      <ul class="flex flex-col gap-4" role="list">
+        {furtherReading.map(({ label, url }) => (
+          <li class="flex gap-2 items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0 mt-0.5 text-brand-white" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+            </svg>
+            <a href={url} target="_blank" rel="noopener noreferrer"
+              class="font-merriweather-sans font-normal text-brand-white text-body leading-[1.25] underline hover:text-brand-yellow transition-colors">
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+  </div>
+</section>

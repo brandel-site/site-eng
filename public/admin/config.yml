@@ -1,0 +1,138 @@
+# ═══════════════════════════════════════════════════════════════
+#  Decap CMS — Content Management for Brandel website
+#
+#  Michal logs in at https://yourdomain.com/admin to edit all
+#  text, reviews, images, and services — no coding required.
+#
+#  ONE-TIME DEVELOPER SETUP:
+#  1. Push the project to GitHub
+#  2. Deploy on Netlify (drag-and-drop the /dist folder, or connect GitHub)
+#  3. Netlify dashboard → Site configuration → Identity → Enable
+#  4. Identity → Registration preferences → change to "Invite only"
+#  5. Identity → Invite users → enter contact@brandel.co.il (or her email)
+#  6. Identity → Services → Git Gateway → Enable Git Gateway
+#  7. Michal accepts the invitation email and sets her password
+#  8. Done — she can now go to /admin and edit everything
+# ═══════════════════════════════════════════════════════════════
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Uncomment to test the CMS locally:
+# local_backend: true
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+
+  # ── Site Content ─────────────────────────────────────────────
+  - name: "site_content"
+    label: "📄 Site Content"
+    files:
+
+      - name: "all_content"
+        label: "Edit All Site Text & Images"
+        file: "src/data/site.json"
+        fields:
+
+          - label: "Hero Section (top of page)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Main Heading",       name: "heading",         widget: "string" }
+              - { label: "Subtitle Text",       name: "subtext",         widget: "text" }
+              - { label: "Button Text",         name: "ctaText",         widget: "string" }
+              - { label: "Background Photo",    name: "backgroundImage", widget: "image",
+                  hint: "Upload a wide landscape photo (food, market, or professional). Recommended: 1600×900px or larger." }
+
+          - label: "Services Section"
+            name: "services"
+            widget: "object"
+            fields:
+              - { label: "Section Heading", name: "sectionHeading", widget: "string" }
+              - { label: "Section Subtext", name: "sectionSubtext", widget: "text" }
+
+          - label: "Why Israel Is Different Section"
+            name: "whyIsrael"
+            widget: "object"
+            fields:
+              - { label: "Section Heading", name: "sectionHeading", widget: "string" }
+              - { label: "Section Subtext", name: "sectionSubtext", widget: "text" }
+              - label: "Explanation Cards (3 cards)"
+                name: "cards"
+                widget: "list"
+                fields:
+                  - { label: "Card Title", name: "title", widget: "string" }
+                  - { label: "Card Text",  name: "body",  widget: "text" }
+              - label: "Further Reading Links"
+                name: "furtherReading"
+                widget: "list"
+                fields:
+                  - { label: "Link Text", name: "label", widget: "string" }
+                  - { label: "URL",       name: "url",   widget: "string" }
+
+          - label: "About / Bio Section"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Section Heading", name: "sectionHeading", widget: "string" }
+              - { label: "Bio Text",        name: "body",           widget: "text" }
+              - { label: "Your Portrait Photo", name: "portraitImage", widget: "image",
+                  hint: "Upload a professional portrait photo. Recommended: 375×440px or taller." }
+
+          - label: "Contact Section"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Section Heading", name: "sectionHeading", widget: "string" }
+              - { label: "Subtext",         name: "subtext",        widget: "text" }
+              - { label: "Email Address",   name: "email",          widget: "string" }
+              - { label: "Location",        name: "location",       widget: "string" }
+
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Copyright Text", name: "copyright", widget: "string" }
+
+  # ── Reviews & Testimonials ───────────────────────────────────
+  - name: "testimonials"
+    label: "⭐ Reviews & Testimonials"
+    folder: "src/content/testimonials"
+    create: true
+    delete: true
+    slug: "{{order}}-{{clientName}}"
+    summary: "{{clientName}} — {{company}}"
+    fields:
+      - { label: "Client's Quote / Review",
+          name: "quote",
+          widget: "text",
+          hint: "The review in the client's own words." }
+      - { label: "Client Name",   name: "clientName", widget: "string" }
+      - { label: "Job Title",     name: "jobTitle",   widget: "string" }
+      - { label: "Company",       name: "company",    widget: "string" }
+      - { label: "Display Order", name: "order",      widget: "number", default: 1,
+          hint: "1 = shown first. Change this number to reorder testimonials." }
+
+  # ── Services ─────────────────────────────────────────────────
+  - name: "services"
+    label: "⚖️ Services"
+    folder: "src/content/services"
+    create: true
+    delete: true
+    slug: "{{order}}-{{title}}"
+    summary: "{{order}}. {{title}}"
+    fields:
+      - { label: "Service Title",  name: "title",       widget: "string" }
+      - { label: "Display Order",  name: "order",       widget: "number", default: 1,
+          hint: "1 = shown first in the grid." }
+      - { label: "Short Description", name: "description", widget: "text", required: false,
+          hint: "Shown in bold when the card is expanded." }
+      - label: "Bullet Points"
+        name: "bullets"
+        widget: "list"
+        required: false
+        hint: "Each line becomes a bullet point shown when the card is expanded."
+        field: { label: "Bullet", name: "item", widget: "string" }

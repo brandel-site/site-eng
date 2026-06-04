@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Keep CMS admin panel out of search index
+Disallow: /admin/
+
+Sitemap: https://www.brandel.co.il/sitemap-index.xml

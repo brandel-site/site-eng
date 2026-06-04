@@ -1,0 +1,78 @@
+---
+import Layout       from '../layouts/Layout.astro';
+import Header       from '../components/Header.astro';
+import Hero         from '../components/Hero.astro';
+import Services     from '../components/Services.astro';
+import About        from '../components/About.astro';
+import WhyIsrael    from '../components/WhyIsrael.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Contact      from '../components/Contact.astro';
+import Footer       from '../components/Footer.astro';
+
+import { getCollection } from 'astro:content';
+import siteData from '../data/site.json';
+
+const rawServices     = await getCollection('services');
+const rawTestimonials = await getCollection('testimonials');
+
+const services     = rawServices    .sort((a, b) => a.data.order - b.data.order).map(s => s.data);
+const testimonials = rawTestimonials.sort((a, b) => a.data.order - b.data.order).map(t => t.data);
+---
+
+<Layout>
+  <Header />
+
+  <main id="main-content">
+
+    <!-- 1 · Hero -->
+    <Hero
+      heading={siteData.hero.heading}
+      subtext={siteData.hero.subtext}
+      ctaText={siteData.hero.ctaText}
+      backgroundImage={siteData.hero.backgroundImage}
+    />
+
+    <!-- 2 · Services -->
+    <Services
+      sectionHeading={siteData.services.sectionHeading}
+      sectionSubtext={siteData.services.sectionSubtext}
+      services={services}
+    />
+
+    <!-- 3 · About — bg rgba(255,255,255,0.02) matching Figma WhyWorkWithUs -->
+    <section id="about" aria-labelledby="about-heading"
+      class="bg-[rgba(255,255,255,0.02)] py-32 w-full">
+      <div class="max-w-site mx-auto px-16">
+        <About
+          sectionHeading={siteData.about.sectionHeading}
+          body={siteData.about.body}
+          portraitImage={siteData.about.portraitImage}
+        />
+      </div>
+    </section>
+
+    <!-- 4 · Why Israel Is Different -->
+    <WhyIsrael
+      sectionHeading={siteData.whyIsrael.sectionHeading}
+      sectionSubtext={siteData.whyIsrael.sectionSubtext}
+      cards={siteData.whyIsrael.cards}
+      furtherReading={siteData.whyIsrael.furtherReading}
+    />
+
+    <!-- 5 · Testimonials -->
+    <section aria-label="Client testimonials" class="py-16 w-full">
+      <div class="max-w-site mx-auto px-16">
+        <Testimonials testimonials={testimonials} />
+      </div>
+    </section>
+
+    <!-- 6 · Contact -->
+    <Contact
+      sectionHeading={siteData.contact.sectionHeading}
+      subtext={siteData.contact.subtext}
+    />
+
+  </main>
+
+  <Footer copyright={siteData.footer.copyright} />
+</Layout>

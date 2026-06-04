@@ -1,0 +1,53 @@
+---
+---
+<header class="bg-brand-dark sticky top-0 z-40 w-full">
+  <!-- max-w-site = 1120px, px-16 = 64px each side -->
+  <div class="max-w-site mx-auto px-16 py-5 flex items-center justify-between">
+
+    <a href="/" class="no-underline shrink-0">
+      <img src="/images/logo.svg" alt="Michal Brandel – Regulatory Legal Counsel" width="159" height="36" loading="eager" />
+    </a>
+
+    <nav aria-label="Main navigation" class="hidden md:flex items-center gap-5">
+      <a href="#services" class="font-dm-sans font-normal text-brand-gray-2 text-[14px] leading-5 hover:text-brand-white transition-colors">
+        Services
+      </a>
+      <a href="#about" class="font-dm-sans font-normal text-brand-gray-2 text-[14px] leading-5 p-[10px] hover:text-brand-white transition-colors">
+        About
+      </a>
+      <a href="#contact" class="font-dm-sans font-normal text-brand-darker text-[14px] leading-5 bg-brand-yellow px-4 py-1 rounded-lg hover:bg-brand-yellow-light transition-colors">
+        Contact
+      </a>
+    </nav>
+
+    <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"
+      class="md:hidden flex flex-col gap-1.5 p-2">
+      <span class="block w-5 h-0.5 bg-brand-gray-2 rounded"></span>
+      <span class="block w-5 h-0.5 bg-brand-gray-2 rounded"></span>
+      <span class="block w-5 h-0.5 bg-brand-gray-2 rounded"></span>
+    </button>
+  </div>
+
+  <div id="mobile-nav" class="md:hidden hidden flex-col gap-4 px-16 pb-6 bg-brand-dark border-t border-brand-border/30"
+    role="navigation" aria-label="Mobile navigation">
+    <a href="#services" class="font-dm-sans text-brand-gray-2 text-sm py-2 hover:text-brand-white transition-colors">Services</a>
+    <a href="#about"    class="font-dm-sans text-brand-gray-2 text-sm py-2 hover:text-brand-white transition-colors">About</a>
+    <a href="#contact"  class="font-dm-sans bg-brand-yellow text-brand-darker text-sm px-4 py-2 rounded-lg text-center hover:bg-brand-yellow-light transition-colors">Contact</a>
+  </div>
+</header>
+
+<script>
+  const toggle    = document.getElementById('menu-toggle')!;
+  const mobileNav = document.getElementById('mobile-nav')!;
+  toggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.contains('open');
+    mobileNav.classList.toggle('open', !isOpen);
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

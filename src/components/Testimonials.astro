@@ -1,0 +1,123 @@
+---
+interface Testimonial {
+  quote:      string;
+  clientName: string;
+  jobTitle:   string;
+  company:    string;
+}
+interface Props {
+  testimonials: Testimonial[];
+}
+const { testimonials } = Astro.props;
+---
+
+{testimonials.length > 0 && (
+  <div class="flex flex-col gap-8 items-center py-4 w-full">
+
+    <!-- Top gold divider -->
+    <div class="bg-brand-yellow h-px w-full rounded-full" aria-hidden="true"></div>
+
+    <!-- Content -->
+    <div class="w-full px-8 md:px-[200px]" role="region" aria-label="Client testimonials" aria-live="polite">
+
+      <!-- Opening quotation mark — Merriweather Bold, yellow, matching Figma -->
+      <div
+        class="font-merriweather font-bold text-brand-yellow select-none mb-5"
+        style="font-size: 4rem; line-height: 1;"
+        aria-hidden="true"
+      >
+        &ldquo;
+      </div>
+
+      <!-- Slide track — CSS grid stacks all slides in same cell for crossfade -->
+      <div class="testimonial-track" id="testimonial-track">
+        {testimonials.map((t, i) => (
+          <div
+            class={`testimonial-slide${i === 0 ? ' active' : ''}`}
+            data-index={i}
+          >
+            <blockquote>
+              <!-- Quote body: Merriweather Sans Regular 20px / 1.5 leading -->
+              <p class="font-merriweather-sans font-normal text-brand-white text-[20px] leading-[1.5] mb-5">
+                {t.quote}
+              </p>
+
+              <!-- Attribution: name | job title | company -->
+              <footer class="flex flex-wrap items-center gap-5">
+                <span class="font-merriweather-sans font-normal text-brand-gray-1 text-[14px] leading-[1.5] whitespace-nowrap">
+                  {t.clientName}
+                </span>
+                <span class="w-px self-stretch bg-brand-gray-3" aria-hidden="true"></span>
+                <span class="font-merriweather-sans font-normal text-brand-gray-1 text-[14px] leading-[1.5] whitespace-nowrap">
+                  {t.jobTitle}
+                </span>
+                <span class="w-px self-stretch bg-brand-gray-3" aria-hidden="true"></span>
+                <span class="font-merriweather-sans font-normal text-brand-gray-1 text-[14px] leading-[1.5] whitespace-nowrap">
+                  {t.company}
+                </span>
+              </footer>
+            </blockquote>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Navigation dots (only shown when there are multiple testimonials) -->
+    {testimonials.length > 1 && (
+      <div class="flex items-center gap-[9px]" role="tablist" aria-label="Testimonial navigation">
+        {testimonials.map((_, i) => (
+          <button
+            role="tab"
+            data-dot={i}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            aria-label={`Show testimonial ${i + 1}`}
+            class={`w-1.5 h-1.5 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow ${
+              i === 0 ? 'bg-brand-white' : 'bg-brand-gray-3'
+            }`}
+          />
+        ))}
+      </div>
+    )}
+
+    <!-- Bottom gold divider -->
+    <div class="bg-brand-yellow h-px w-full rounded-full" aria-hidden="true"></div>
+
+  </div>
+)}
+
+<script>
+  const slides  = Array.from(document.querySelectorAll<HTMLElement>('.testimonial-slide'));
+  const dots    = Array.from(document.querySelectorAll<HTMLElement>('[data-dot]'));
+  let current   = 0;
+  let timer: ReturnType<typeof setInterval>;
+
+  function goTo(next: number) {
+    // Deactivate current
+    slides[current].classList.remove('active');
+    dots[current]?.classList.replace('bg-brand-white', 'bg-brand-gray-3');
+    dots[current]?.setAttribute('aria-selected', 'false');
+
+    // Activate next
+    current = (next + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current]?.classList.replace('bg-brand-gray-3', 'bg-brand-white');
+    dots[current]?.setAttribute('aria-selected', 'true');
+  }
+
+  function startAuto() {
+    // 20 seconds between slides
+    timer = setInterval(() => goTo(current + 1), 20000);
+  }
+
+  // Dot clicks reset the timer so manual nav doesn't fight auto-advance
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      clearInterval(timer);
+      goTo(Number(dot.dataset.dot));
+      startAuto();
+    });
+  });
+
+  // Only auto-advance when there is more than one slide
+  if (slides.length > 1) startAuto();
+</script>
