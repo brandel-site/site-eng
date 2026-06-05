@@ -90,6 +90,9 @@ const GA_ID = 'G-SKHFM9D17F';
   }
   </script>
 
+  <!-- Netlify Identity Widget (required for Decap CMS login flow) -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
   <!-- Google Analytics 4 -->
   <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
   <script define:vars={{ GA_ID }}>
@@ -101,6 +104,15 @@ const GA_ID = 'G-SKHFM9D17F';
 </head>
 
 <body class="bg-brand-darker text-brand-white font-merriweather-sans antialiased">
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', user => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => { document.location.href = '/admin/'; });
+        }
+      });
+    }
+  </script>
   <!-- Accessibility: skip nav link -->
   <a
     href="#main-content"
