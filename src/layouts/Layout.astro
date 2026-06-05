@@ -111,6 +111,10 @@ const GA_ID = 'G-SKHFM9D17F';
           window.netlifyIdentity.on('login', () => { document.location.href = '/admin/'; });
         }
       });
+      const hash = window.location.hash;
+      if (hash.includes('invite_token') || hash.includes('recovery_token') || hash.includes('confirmation_token')) {
+        window.netlifyIdentity.open();
+      }
     }
   </script>
   <!-- Accessibility: skip nav link -->
