@@ -1,6 +1,6 @@
 ---
-interface Props { sectionHeading: string; subtext: string; }
-const { sectionHeading, subtext } = Astro.props;
+interface Props { sectionHeading: string; subtext: string; logoImage?: string; }
+const { sectionHeading, subtext, logoImage } = Astro.props;
 const FORMSPREE_ID = 'mzdqbqqp';
 ---
 <section id="contact" class="bg-[rgba(255,255,255,0.02)] py-32 w-full" aria-labelledby="contact-heading">
@@ -17,6 +17,16 @@ const FORMSPREE_ID = 'mzdqbqqp';
           {subtext}
         </p>
       </div>
+      {logoImage && (
+        <img
+          src={logoImage}
+          alt="Brandel logo"
+          width="160"
+          height="160"
+          loading="lazy"
+          class="w-40 h-40 object-contain"
+        />
+      )}
     </div>
 
     <!-- Right: form -->

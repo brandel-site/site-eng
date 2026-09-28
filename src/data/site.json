@@ -49,6 +49,7 @@
   "contact": {
     "sectionHeading": "Get In Touch",
     "subtext": "Contact us to request regulatory advisory regarding the Israeli market requirements.",
+    "logoImage": "/images/brandel-logo.png",
     "email": "michal@brandel.co.il",
     "location": "Tel Aviv, Israel"
   },
