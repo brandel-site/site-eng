@@ -1,6 +1,6 @@
 # Brandel — Israeli Food Law Website
 
-Professional website for **Michal Brandel**, Regulatory Legal Counsel.
+Professional website for **Michal Brandel**, Antitrust & Regulatory Legal Counsel.
 
 ---
 
