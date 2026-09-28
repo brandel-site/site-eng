@@ -7,7 +7,7 @@
   },
   "services": {
     "sectionHeading": "Services",
-    "sectionSubtext": "Advising food and beverages manufacturers, importers, distributors, and international brands on Israeli food regulation, European regulatory alignment, and the legal and commercial implications of the \"What Is Good for Europe Is Good for Israel\" reform."
+    "sectionSubtext": "Brandel is a boutique Israeli law firm specializing in competition and antitrust law, regulatory matters, and litigation, serving clients across industries, with particular expertise in the food and beverage sector."
   },
   "whyIsrael": {
     "sectionHeading": "Why Israel Is Different",
@@ -49,10 +49,10 @@
   "contact": {
     "sectionHeading": "Get In Touch",
     "subtext": "Contact us to request regulatory advisory regarding the Israeli market requirements.",
-    "email": "contact@brandel.co.il",
+    "email": "michal@brandel.co.il",
     "location": "Tel Aviv, Israel"
   },
   "footer": {
-    "copyright": "© 2026 Brandel. Expert food regulation counsel for Israeli market entry."
+    "copyright": "© 2026 Brandel. Expert Antitrust law and food regulation counsel."
   }
 }
