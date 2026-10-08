@@ -53,7 +53,7 @@ Two placeholder images need to be replaced with real photos:
 | File | Description |
 |---|---|
 | `public/images/hero-bg.svg` | The background image behind the hero heading — replace with a food/market photo (1600×900px recommended) |
-| `public/images/michal-portrait.svg` | Michal's professional portrait (375×440px recommended) |
+| `public/images/michal-brandel-food-and-competition-expert.svg` | Michal Brandel Food and Competition expert portrait (375×440px recommended) |
 
 **Easiest way:** Log in at `/admin`, go to Site Content, and upload photos directly there.
 
